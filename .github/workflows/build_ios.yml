@@ -23,13 +23,21 @@ jobs:
         working-directory: geldroid
         run: flutter pub get
 
-      - name: Build IPA (no codesign)
+      - name: Build iOS app (no codesign)
         working-directory: geldroid
-        run: flutter build ipa --no-codesign
+        run: flutter build ios --release --no-codesign
+
+      - name: Create IPA
+        run: |
+          cd geldroid/build/ios/iphoneos
+          mkdir Payload
+          cp -r Runner.app Payload/
+          zip -r GelDroid.ipa Payload/
+          mv GelDroid.ipa $GITHUB_WORKSPACE/GelDroid.ipa
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
           name: GelDroid-iOS
-          path: geldroid/build/ios/ipa/*.ipa
+          path: GelDroid.ipa
           retention-days: 30
