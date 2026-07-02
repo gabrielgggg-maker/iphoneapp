@@ -1,0 +1,14 @@
+# APK compilado - não precisa subir
+*.apk
+*.ipa
+*.aab
+
+# Logs
+*.log
+build_log.txt
+
+# Flutter build
+geldroid/build/
+geldroid/.dart_tool/
+geldroid/.flutter-plugins
+geldroid/.flutter-plugins-dependencies
